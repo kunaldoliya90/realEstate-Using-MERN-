@@ -13,6 +13,7 @@ export default function Profile() {
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [showListingsError, setShowListingsError] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -74,7 +75,7 @@ export default function Profile() {
   const handleDeleteUser = async () => {
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+      const res = await fetch(`api/user/delete/${currentUser._id}`, {
         method: 'DELETE',
       });
       const data = await res.json();
@@ -103,6 +104,22 @@ export default function Profile() {
       dispatch(signOutUserFailure(data.message));
     }
   }
+
+  const handleShowListings = async() => {
+    try {
+      setShowListingsError(false);
+      const res = await fetch(`api/user/listings/${currentUser._id}`);
+      const data = await res.json();
+      if(data.success === false){
+        setShowListingsError(true);
+        return;
+      }
+    } catch (error) {
+      setShowListingsError(true);
+    }
+  }
+
+
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
@@ -173,6 +190,9 @@ export default function Profile() {
 
       <p className='text-red-700 mt-5'>{error ? error : ""}</p>
       <p className='text-green-700 mt-5'>{updateSuccess ? 'User updated Successfully' : ""}</p>
+
+      <button onClick={handleShowListings} className='text-green-700 w-full'>Show Listings</button>
+      <p className='text-red-700 mt-5'>{showListingsError ? 'Error showing listings' : ""}</p>
     </div>
   );
 }
