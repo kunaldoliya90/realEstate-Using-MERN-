@@ -275,8 +275,7 @@ export default function CreateListing() {
               <input
                 type="number"
                 id="regularPrice"
-                min="50"
-                max="10000000"
+                min="5000"
                 required
                 className="p-3 border border-gray-300 rounded-lg"
                 onChange={handleChange}
@@ -285,7 +284,7 @@ export default function CreateListing() {
               <div className="flex flex-col items-center">
                 <p>Regular Price</p>
                 {formData.type === "rent" && (
-                  <span className="text-xs">($ / month)</span>
+                  <span className="text-xs">(₹ / month)</span>
                 )}
               </div>
             </div>
@@ -295,7 +294,6 @@ export default function CreateListing() {
                   type="number"
                   id="discountPrice"
                   min="0"
-                  max="10000000"
                   required
                   className="p-3 border border-gray-300 rounded-lg"
                   onChange={handleChange}
@@ -304,7 +302,7 @@ export default function CreateListing() {
                 <div className="flex flex-col items-center">
                   <p>Discounted Price</p>
                   {formData.type === "rent" && (
-                    <span className="text-xs">($ / month)</span>
+                    <span className="text-xs">(₹ / month)</span>
                   )}
                 </div>
               </div>
@@ -316,7 +314,7 @@ export default function CreateListing() {
           <p className="font-semibold">
             Images:{" "}
             <span className="font-normal text-gray-600 ml-2">
-              The first image will be the cover (max 6)
+              The first image will be the cover image(max 6)
             </span>
           </p>
           <div className="flex gap-4">

@@ -27,11 +27,11 @@ export default function ListingItem({ listing }) {
             {listing.description}
           </p>
           <p className='text-slate-500 mt-2 font-semibold '>
-            $
+            ₹
             {listing.offer && listing.discountPrice !== undefined
-              ? listing.discountPrice.toLocaleString('en-US')
+              ? listing.discountPrice.toLocaleString('en-IN')
               : listing.regularPrice !== undefined
-              ? listing.regularPrice.toLocaleString('en-US')
+              ? listing.regularPrice.toLocaleString('en-IN')
               : 'N/A'}
             {listing.type === 'rent' && ' / month'}
           </p>

@@ -123,7 +123,12 @@ function Profile() {
 
   const handleShowListings = async () => {
     try {
-      const res = await fetch(`api/user/listings/${currentUser._id}`);
+      const token = currentUser.token; // Adjust this line based on where your token is stored
+      const res = await fetch(`/api/user/listings/${currentUser._id}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`, // Include the token in the request
+        },
+      });
       const data = await res.json();
       if (data.success === false) {
         setShowListingsError(true);
@@ -134,6 +139,7 @@ function Profile() {
       setShowListingsError(true);
     }
   };
+  
 
   const handleListingDelete = async (listingId) => {
     try {
